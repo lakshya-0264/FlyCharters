@@ -1,4 +1,4 @@
-# **FlyCharters** - Connecting the world through private aviation, one flight at a time.
+# FlyCharters
 
 ## 🚁 Project Overview
 
@@ -471,3 +471,4 @@ src/
 - Performance optimizations
 
 ---
+
