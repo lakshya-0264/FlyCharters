@@ -1,5 +1,5 @@
-# flightcharters_backend
-Repository for FlightCharters Backend
+# FlyCharters_backend
+Repository for FlyCharters Backend
 
 ## Environment Variables
 
