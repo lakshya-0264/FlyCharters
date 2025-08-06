@@ -1,4 +1,4 @@
-# FlyCharters - Complete Documentation
+# FlyCharters
 
 ## 🚁 Project Overview
 
@@ -9,8 +9,8 @@ FlyCharters is a comprehensive flight charter booking platform that connects cus
 ### Full-Stack Structure
 ```
 flightcharters/
-├── flightcharters_frontend/     # React Frontend Application
-└── flightcharters_backend/      # Node.js/Express Backend API
+├── flycharters_frontend/     # React Frontend Application
+└── flycharters_backend/      # Node.js/Express Backend API
 ```
 
 ### Technology Stack
@@ -69,12 +69,6 @@ The user dashboard (`src/components/CustomerView/User_dash.jsx`) is the main int
 #### **Component Structure & Technologies Used:**
 
 **1. Main Component: `User_dash.jsx`**
-```javascript
-// Technologies: React Hooks, React Router, Lucide React Icons
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Plane, User, Star, Home, LogOut, Search, Calendar, Users, MapPin } from 'lucide-react';
-```
 
 **Key Features:**
 - **State Management:** Uses React hooks for local state
@@ -83,27 +77,6 @@ import { Plane, User, Star, Home, LogOut, Search, Calendar, Users, MapPin } from
 - **Responsive Design:** CSS Grid and Flexbox for layout
 
 **2. Styling Architecture: `User_dash.css`**
-```css
-/* Component-specific styling with modern CSS features */
-.user-dash-container {
-    min-height: 100vh;
-    background-color: #f8f9fa;
-}
-
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.3rem 3rem;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    height: 80px;
-}
-```
 
 **CSS Technologies Used:**
 - **CSS Grid:** For responsive layouts
@@ -115,133 +88,25 @@ import { Plane, User, Star, Home, LogOut, Search, Calendar, Users, MapPin } from
 #### **User Dashboard Features:**
 
 **1. Navigation Bar (`navbar`)**
-```javascript
-// Features: Fixed positioning, user profile dropdown, logout functionality
-const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-// Dropdown functionality with hover effects
-const handleMouseEnter = () => {
-    if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-    }
-    setIsDropdownOpen(true);
-};
-```
-
 **2. Flight Booking Form Integration**
-```javascript
-// Integrated component for flight search
-import FlightBookingForm from "./Flight_Booking/FlightBookingForm";
-
-// Rendered in dashboard content
-const DashboardContent = () => (
-    <>
-        <FlightBookingForm/>
-        <UpcomingBookingsOneway/>
-        {/* Additional sections */}
-    </>
-);
-```
-
 **3. Upgrade Services Section**
-```javascript
-const upgradeOptions = [
-    { 
-        title: 'Add Land Commute',
-        image: addlandcommute,
-        route: '/user/landcommute'
-    },
-    { 
-        title: 'Add Onboard Catering',
-        image: myImage,
-        route: '/user/catering'
-    },
-    {
-        title: 'Add Pet Travel',
-        image: pettravel,
-        route: '/user/pettravel'
-    },
-    { 
-        title: 'Add a Celebration',
-        image: celebration,
-        route: '/user/celebration'
-    }
-];
-```
-
 **4. Real-time Features**
-```javascript
-// Socket.io integration for live updates
-import NotificationIcon from '../common/Notification.jsx';
-
-// User ID for real-time notifications
-const userId = localStorage.getItem("id");
-```
 
 #### **User Dashboard API Connections:**
 
 **1. Authentication APIs**
-```javascript
-// Logout functionality
-const handleLogout = async () => {
-    setIsLoggingOut(true);
-    setIsDropdownOpen(false);
-    localStorage.clear();
-    localStorage.setItem("showLogoutToast", "true");
-    navigate('/', { replace: true });
-};
-```
-
 **2. Flight Booking APIs**
-```javascript
-// Integrated through FlightBookingForm component
-// APIs called: /fleet/availablefleet, /empty/search, /flight/create
-```
-
 **3. User Profile APIs**
-```javascript
-// User data from localStorage
-const first_name = localStorage.getItem("first_name");
-```
 
 #### **User Dashboard State Management:**
 
 **1. Local State (React Hooks)**
-```javascript
-const [feedback, setFeedback] = useState('');
-const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-const [isLoggingOut, setIsLoggingOut] = useState(false);
-```
-
 **2. Redux Integration**
-```javascript
-// Connected to Redux store for global state
-// User preferences, booking data, authentication state
-```
 
 #### **User Dashboard Routing:**
 
 **1. Nested Routes**
-```javascript
-// UserLayout handles routing with Outlet
-const UserLayout = () => {
-    return (
-        <ProtectedRoute allowedRoles={['user']}>
-            <NotificationIcon userId={userId}/>
-            <User_dash />
-        </ProtectedRoute>
-    );
-};
-```
-
 **2. Route Protection**
-```javascript
-// ProtectedRoute component ensures only authenticated users access
-<ProtectedRoute allowedRoles={['user']}>
-    {/* User dashboard content */}
-</ProtectedRoute>
-```
 
 ## 👨‍💼 **DETAILED ADMIN DASHBOARD ARCHITECTURE**
 
@@ -251,13 +116,6 @@ The admin dashboard (`src/components/AdminView/AdminDashboard.jsx`) provides com
 #### **Component Structure & Technologies Used:**
 
 **1. Main Admin Component: `AdminDashboard.jsx`**
-```javascript
-// Technologies: React Hooks, Fetch API, Recharts, Lucide React
-import React, { useState, useEffect } from 'react';
-import { LogOut, Users, Truck, Check, X, Eye, Plane, Clock, CheckCircle, AlertCircle, BarChart3 } from 'lucide-react';
-import OperatorManagement from './OperatorManagement';
-import AdminDashboardAnalytics from './AdminDashboardAnalytics';
-```
 
 **Key Features:**
 - **Tab-based Navigation:** Multiple admin functions in tabs
@@ -266,218 +124,28 @@ import AdminDashboardAnalytics from './AdminDashboardAnalytics';
 - **Role-based Access:** Admin-only functionality
 
 **2. Admin Styling: `AdminDashboard.css`**
-```css
-/* Modern admin dashboard styling */
-.admin-dashboard {
-  min-height: 100vh;
-  background-color: #f9fafb;
-  padding: 1.5rem;
-}
-
-.dashboard-container-admin {
-  max-width: 80rem;
-  margin: 0 auto;
-}
-
-/* Responsive grid layouts */
-.dashboard-header {
-  margin-bottom: 2rem;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-```
 
 #### **Admin Dashboard Features:**
 
 **1. Tab Navigation System**
-```javascript
-const [activeTab, setActiveTab] = useState('operators');
-
-// Tab switching with visual feedback
-<button
-  onClick={() => setActiveTab('operators')}
-  style={{
-    padding: '8px 4px',
-    borderBottom: activeTab === 'operators' ? '2px solid #1e40af' : '2px solid transparent',
-    fontWeight: '500',
-    fontSize: '0.95rem',
-    color: activeTab === 'operators' ? '#1e40af' : '#64748b',
-  }}
->
-  <Users style={{ width: '20px', height: '20px' }} />
-  Operator Management
-</button>
-```
-
 **2. Fleet Management System**
-```javascript
-const FleetManagement = () => {
-  const [fleets, setFleets] = useState([]);
-  const [stats, setStats] = useState({ 
-    totalFleets: 0, 
-    pendingApproval: 0, 
-    approvedFleets: 0, 
-    maintenanceFleets: 0 
-  });
-  const [loading, setLoading] = useState(true);
-  const [processingFleetId, setProcessingFleetId] = useState(null);
-```
-
 **3. Analytics Dashboard**
-```javascript
-// AdminDashboardAnalytics.jsx - Comprehensive analytics
-const AnalyticsDashboard = () => {
-  const [data, setData] = useState({
-    overview: {},
-    bookings: {},
-    fleet: {},
-    operators: {},
-    routes: {}
-  });
-```
 
 #### **Admin Dashboard API Connections:**
 
 **1. Fleet Management APIs**
-```javascript
-const API_BASE = 'http://localhost:8080/fleet';
-
-const fetchFleets = async () => {
-  try {
-    const response = await fetch(`${API_BASE}/fleetsRequestingApproval`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-    });
-    const data = await response.json();
-    if (data.success) {
-      setFleets(data.data || []);
-    }
-  } catch (error) {
-    console.error('Error fetching fleets:', error);
-  }
-};
-```
-
 **2. Analytics APIs**
-```javascript
-const API_BASE = 'http://localhost:8080/analytics';
-
-const fetchData = async (endpoint, key) => {
-  try {
-    const response = await fetch(`${API_BASE}${endpoint}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-    });
-    const result = await response.json();
-    if (result.success) {
-      setData(prev => ({ ...prev, [key]: result.data }));
-    }
-  } catch (error) {
-    console.error(`Error fetching ${key} data:`, error);
-  }
-};
-```
-
 **3. Operator Management APIs**
-```javascript
-// Operator verification and management
-const verifyOperator = async (operatorId) => {
-  try {
-    const response = await fetch(`${API_BASE}/verify/${operatorId}`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-    });
-    const data = await response.json();
-    if (data.success) {
-      alert('Operator verified successfully!');
-      fetchOperators();
-      fetchStats();
-    }
-  } catch (error) {
-    console.error('Error verifying operator:', error);
-  }
-};
-```
 
 #### **Admin Dashboard State Management:**
 
 **1. Local State Management**
-```javascript
-// Fleet management state
-const [fleets, setFleets] = useState([]);
-const [stats, setStats] = useState({});
-const [loading, setLoading] = useState(true);
-const [processingFleetId, setProcessingFleetId] = useState(null);
-
-// Analytics state
-const [data, setData] = useState({
-  overview: {},
-  bookings: {},
-  fleet: {},
-  operators: {},
-  routes: {}
-});
-```
-
 **2. Real-time Updates**
-```javascript
-// Automatic data refresh
-useEffect(() => {
-  fetchFleets();
-  fetchStats();
-}, [filter]);
-
-// Periodic updates for analytics
-useEffect(() => {
-  const interval = setInterval(() => {
-    fetchData('/overview', 'overview');
-  }, 300000); // 5 minutes
-  return () => clearInterval(interval);
-}, []);
-```
 
 #### **Admin Dashboard Analytics:**
 
 **1. Chart Components (Recharts)**
-```javascript
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
-// Booking trends chart
-<LineChart data={dailyData}>
-  <CartesianGrid strokeDasharray="3 3" />
-  <XAxis dataKey="date" />
-  <YAxis />
-  <Tooltip />
-  <Legend />
-  <Line type="monotone" dataKey="total" stroke="#3B82F6" strokeWidth={2} name="Total" />
-  <Line type="monotone" dataKey="confirmed" stroke="#10B981" strokeWidth={2} name="Confirmed" />
-  <Line type="monotone" dataKey="cancelled" stroke="#EF4444" strokeWidth={2} name="Cancelled" />
-</LineChart>
-```
-
 **2. Statistics Cards**
-```javascript
-const StatCard = ({ title, value, icon: Icon, color = "blue" }) => (
-  <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="text-2xl font-bold text-gray-900">{value}</p>
-      </div>
-      <div className={`p-3 rounded-full bg-${color}-100`}>
-        <Icon className={`w-6 h-6 text-${color}-600`} />
-      </div>
-    </div>
-  </div>
-);
-```
 
 ## 🛩️ Core Features & API Connections
 
@@ -622,56 +290,10 @@ GET    /invoice/addon/:id/:paymentId # Generate regular flight invoice
 ### Core Models (Backend: src/Models/)
 
 #### User Management
-```javascript
-// userModel.js
-{
-  name, email, password, role, phone, 
-  isVerified, profileImage, createdAt
-}
-
-// operatorModel.js  
-{
-  name, email, password, companyName, 
-  isAdminVerify, documents, fleet
-}
-```
 
 #### Flight & Booking
-```javascript
-// flightsModel.js
-{
-  operatorId, departureAirport, destinationAirport,
-  departureDate, departureTime, aircraftId,
-  price, availableSeats, status
-}
-
-// bookingModel.js
-{
-  userId, flightId, passengerDetails,
-  paymentId, bookingStatus, totalAmount
-}
-
-// emptylegbookingModel.js
-{
-  emptyLegId, userId, passengerDetails,
-  paymentId, bookingStatus, specialRequests
-}
-```
 
 #### Fleet & Aircraft
-```javascript
-// fleetModel.js
-{
-  operatorId, aircraftId, registrationNumber,
-  capacity, isAdminVerify, status, documents
-}
-
-// aircraftModel.js
-{
-  manufacturer, model, type, maxRange,
-  maxAltitude, landingCapabilities
-}
-```
 
 ## 🔄 Data Flow Architecture
 
@@ -701,14 +323,14 @@ User Chat → Socket.io → Backend → Database → Socket.io → Operator Chat
 
 ### Frontend Setup
 ```bash
-cd flightcharters_frontend
+cd flycharters_frontend
 npm install
 npm run dev
 ```
 
 ### Backend Setup
 ```bash
-cd flightcharters_backend
+cd flycharters_backend
 npm install
 npm run dev
 ```
@@ -722,12 +344,36 @@ VITE_API_BASE_URL=http://localhost:8080
 
 #### Backend (.env)
 ```env
+FRONT_END_URL=http://localhost:5173
 PORT=8080
-MONGODB_URI=your_mongodb_connection_string
+
+# Database
+MONGO_URI=your_mongodb_connection_string
+
+# JWT Auth
 JWT_SECRET=your_jwt_secret
+
+# NodeMailer
+EMAIL_SERVICE=
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_PASS=
+EMAIL_USER=
+SECRET_KEY=
+JWT_SECREATE_KEY_BACKEND=
+
+# Cloudinary
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+
+BACKEND_URL=http://localhost:8080
+ORIGIN=FRONT_END_URL
+
+# Cashfree Payments Gateway
 CASHFREE_API_ID=your_cashfree_app_id
 CASHFREE_API_KEY=your_cashfree_secret_key
-ORIGIN=http://localhost:5173
+
 ```
 
 ## 📱 Component Architecture
@@ -826,4 +472,3 @@ src/
 
 ---
 
-**FlyCharters** - Connecting the world through private aviation, one flight at a time.
