@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-on Invoice - Fly Charter Inc.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #e0f2f7;
+            /* Lighter blue background */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .invoice-container {
+            max-width: 900px;
+            /* Slightly wider container */
+            margin: 30px auto;
+            background-color: white;
+            padding: 50px;
+            box-shadow: 0 8px 30px rgba(0, 50, 100, 0.15);
+            /* More prominent shadow with blue tint */
+            border-radius: 15px;
+            /* More rounded corners */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle flight-themed background element */
+        .invoice-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            /* Blue gradient top border */
+            border-radius: 15px 15px 0 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            /* Align to the top for classical look */
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            /* Slightly thicker border */
+            margin-bottom: 30px;
+        }
+
+        header .logo-section img {
+            max-height: 100px;
+            /* Slightly larger logo area */
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        header .company-info {
+            text-align: right;
+            /* This aligns all text content inside to the right */
+            color: #2c3e50;
+        }
+
+        header .company-info h1 {
+            margin: 0 0 8px 0;
+            /* Ensures the heading itself has proper spacing */
+            color: #0056b3;
+            font-size: 2.2em;
+            letter-spacing: 1px;
+        }
+
+        header .company-info p {
+            margin: 0;
+            /* Removes default paragraph margins that might disrupt alignment */
+            font-size: 1em;
+            color: #555;
+        }
+
+        .invoice-title {
+            text-align: center;
+            margin-bottom: 30px;
+            /* Reduced margin */
+            padding: 8px 0;
+            /* Significantly reduced padding */
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .invoice-title h2 {
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 2em;
+            /* Reduced font size */
+            color: #007bff;
+            border-bottom: 3px solid #0056b3;
+            /* Slightly thinner border */
+            display: inline-block;
+            padding-bottom: 5px;
+            /* Reduced padding */
+            letter-spacing: 1px;
+            /* Slightly reduced letter spacing */
+            font-weight: 700;
+        }
+
+        .invoice-title p {
+            margin-top: 8px;
+            /* Reduced margin */
+            font-size: 1em;
+            /* Reduced font size */
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Removed SVG styles */
+        .invoice-title .plane-svg {
+            display: none;
+        }
+
+        .section-table {
+            margin-bottom: 35px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .section-table h3 {
+            background-color: #007bff;
+            /* Blue header for sections */
+            color: white;
+            padding: 15px 20px;
+            margin: 0;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-bottom: 1px solid #0056b3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Removed SVG for section headers */
+        .section-table h3::before {
+            display: none;
+        }
+
+        .section-table h3 span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .section-table th,
+        .section-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            font-size: 1.05em;
+        }
+
+        .section-table th {
+            background-color: #f8fafd;
+            /* Lighter background for labels */
+            color: #444;
+            width: 35%;
+            /* Adjust width for labels */
+            font-weight: 600;
+        }
+
+        .section-table td {
+            color: #555;
+        }
+
+        .section-table tr:last-child td,
+        .section-table tr:last-child th {
+            border-bottom: none;
+        }
+
+        .item-table {
+            margin-bottom: 35px;
+        }
+
+        .item-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .item-table th,
+        .item-table td {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .item-table th {
+            background-color: #007bff;
+            /* Blue header for item table */
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.95em;
+            letter-spacing: 0.8px;
+        }
+
+        .item-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .item-table td:last-child,
+        .item-table th:last-child {
+            text-align: right;
+        }
+
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 60px;
+            /* Increased spacing */
+            background-color: #f0f8ff;
+            /* Light blue background for totals */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .totals-table td {
+            padding: 12px 20px;
+            border: none;
+            text-align: right;
+            font-size: 1.2em;
+        }
+
+        .totals-table td:first-child {
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: left;
+        }
+
+        .totals-table tr:last-child td {
+            font-size: 1.5em;
+            /* Larger grand total */
+            font-weight: bold;
+            color: #0056b3;
+            /* Darker blue for grand total */
+            border-top: 3px solid #007bff;
+            /* Thicker blue border */
+            padding-top: 18px;
+        }
+
+        .bank-details,
+        .terms {
+            margin-bottom: 35px;
+            padding: 20px 25px;
+            background-color: #e6f7ff;
+            /* Lighter blue background for info sections */
+            border-radius: 10px;
+            border: 1px solid #a0d9ff;
+            /* Blue border */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .bank-details h3,
+        .terms h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #007bff;
+            font-size: 1.6em;
+            /* Larger headings */
+            border-bottom: 2px dashed #66b3ff;
+            /* Dashed blue border */
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .bank-details p {
+            margin: 8px 0;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .terms ul {
+            padding-left: 30px;
+            margin: 0;
+            list-style-type: '— ';
+            /* Changed to dash for classical look */
+            color: #555;
+        }
+
+        .terms ul li {
+            margin-bottom: 10px;
+            font-size: 1em;
+            padding-left: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #777;
+            font-size: 0.95em;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        #authorized-signature {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #0056b3;
+            /* Darker blue for signature text */
+            font-size: 1.1em;
+        }
+
+        #ending {
+            margin-top: 25px;
+            font-style: italic;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .invoice-container {
+                margin: 15px;
+                padding: 20px;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            header .company-info {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .invoice-title h2 {
+                font-size: 2em;
+            }
+
+            .section-table th,
+            .section-table td,
+            .item-table th,
+            .item-table td,
+            .totals-table td,
+            .bank-details p,
+            .terms ul li {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+
+            .section-table th {
+                width: 40%;
+            }
+
+            .totals-table tr:last-child td {
+                font-size: 1.3em;
+            }
+
+            .bank-details h3,
+            .terms h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invoice-container {
+                padding: 15px;
+            }
+
+            header .logo-section img {
+                max-height: 70px;
+            }
+
+            header .company-info h1 {
+                font-size: 1.6em;
+            }
+
+            .invoice-title h2 {
+                font-size: 1.6em;
+            }
+
+            .section-table th,
+            .section-table td,
+            .item-table th,
+            .item-table td {
+                display: block;
+                width: 100%;
+                text-align: left !important;
+                border-bottom: 1px solid #eee;
+            }
+
+            .section-table th {
+                font-weight: bold;
+                background-color: #f8fafd;
+            }
+
+            .item-table th {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .item-table td:last-child {
+                text-align: left !important;
+                /* Override right alignment for mobile */
+            }
+
+            .totals-table td {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-container">
+        <header>
+            <div class="logo-section">
+                <img src="https://placehold.co/180x100/007bff/ffffff?text=FLY+CHARTER+LOGO" alt="Company Logo">
+            </div>
+            <div class="company-info">
+                <h1>Fly Charters</h1>
+                <p>123 Aviation Drive, Skyville, SV 98765<br>
+                    Phone: +1 (555) 123-4567<br>
+                    Email: info@flycharter.com<br>
+                    GST: 27GST00000XYZ</p>
+            </div>
+        </header>
+
+        <section class="invoice-title">
+            <h2>ADD-ON SERVICES INVOICE</h2>
+            <p>Date: <%= invoice.date %>
+            </p>
+        </section>
+
+        <section class="section-table">
+            <h3><span>Customer Details</span></h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>PNR:</th>
+                        <td>
+                            <%= invoice.pnr %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Customer Name:</th>
+                        <td>
+                            <%= invoice.customerName %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Customer Contact:</th>
+                        <td>
+                            <%= invoice.customerContact %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <% if (invoice.flightDetails) { %>
+            <section class="section-table">
+                <h3><span>Associated Flight Details</span></h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Aircraft:</th>
+                            <td>
+                                <%= invoice.flightDetails.aircraft %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Date of Travel:</th>
+                            <td>
+                                <%= invoice.flightDetails.dateOfTravel %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Departure City:</th>
+                            <td>
+                                <%= invoice.flightDetails.departureCity %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Destination City:</th>
+                            <td>
+                                <%= invoice.flightDetails.destinationCity %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <% } %>
+
+                <% if (invoice.addOnItems && invoice.addOnItems.length> 0) { %>
+                    <section class="item-table">
+                        <h3><span>Add-on Details</span></h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Add-on Description</th>
+                                    <th>Quantity/Details</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% invoice.addOnItems.forEach(function(item) { %>
+                                    <tr>
+                                        <td>
+                                            <%= item.description %>
+                                        </td>
+                                        <td>
+                                            <%= item.quantity || item.details || '-' %>
+                                        </td>
+                                        <td>
+                                            <%= invoice.currencySymbol %>
+                                                <%= item.total.toFixed(2) %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </section>
+                    <% } else { %>
+                        <section class="section-table">
+                            <h3><span>Add-on Details</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4">No additional add-on details for this invoice.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                        <% } %>
+
+                            <table class="totals-table">
+                                <tbody>
+                                    <% if (invoice.subtotal) { %>
+                                        <tr>
+                                            <td><strong>Subtotal</strong></td>
+                                            <td>
+                                                <%= invoice.currencySymbol %>
+                                                    <%= invoice.subtotal.toFixed(2) %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% if (invoice.gstAmount) { %>
+                                                <tr>
+                                                    <td><strong>GST (<%= invoice.gstPercentage %>%)</strong></td>
+                                                    <td>
+                                                        <%= invoice.currencySymbol %>
+                                                            <%= invoice.gstAmount.toFixed(2) %>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                    <tr>
+                                                        <td><strong>Grand Total</strong></td>
+                                                        <td>
+                                                            <%= invoice.currencySymbol %>
+                                                                <%= invoice.grandTotal.toFixed(2) %>
+                                                        </td>
+                                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <section class="bank-details">
+                                <h3>Payment Details</h3>
+                                <p>
+                                    Currency: <%= invoice.currency %><br>
+                                        Payment Method: <%= invoice.paymentMethod %><br>
+                                </p>
+                            </section>
+
+                            <section class="terms">
+                                <h3>Terms & Conditions for Add-ons</h3>
+                                <ul>
+                                    <li>All add-on services are subject to availability and prior confirmation.</li>
+                                    <li>Add-on charges are non-refundable unless otherwise specified.</li>
+                                    <li>Any cancellations or modifications to add-on services must be made 24 hours in
+                                        advance.</li>
+                                    <li>Prices for add-on services are exclusive of applicable taxes unless stated
+                                        otherwise.</li>
+                                    <li>For any queries regarding your add-on services or payment, please contact our
+                                        support team.</li>
+                                </ul>
+                            </section>
+
+                            <footer>
+                                <p id="authorized-signature">Authorized Signature</p>
+                                <p id="ending">Thank you for choosing Fly Charter Inc. for your journey and additional
+                                    comforts!</p>
+                                <p>___________________________________</p>
+                                <p>Fly Charter Inc.</p>
+                            </footer>
+    </div>
+</body>
+
+</html>

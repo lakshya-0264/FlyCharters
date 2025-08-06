@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.invoice-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header, .invoice-title, .quote-details, .aircraft-details, .totals, .bank-details, .terms, footer {
+  margin-bottom: 25px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+.invoice-title h2 {
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.quote-details div,
+.aircraft-details div {
+  margin-bottom: 5px;
+}
+
+.item-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.item-table th, .item-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.item-table th {
+  background-color: #eee;
+}
+
+.totals p {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.bank-details h3,
+.terms h3 {
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.terms ul {
+  padding-left: 20px;
+}
+
+footer p {
+  margin-top: 20px;
+}

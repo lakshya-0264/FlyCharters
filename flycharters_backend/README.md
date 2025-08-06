@@ -1,0 +1,31 @@
+# flightcharters_backend
+Repository for FlightCharters Backend
+
+## Environment Variables
+
+- .env.example
+
+```bash
+FRONT_END_URL=
+PORT=
+JWT_SECRET=
+MONGO_URI=
+
+EMAIL_SERVICE=
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_PASS=
+EMAIL_USER=
+SECRET_KEY=
+
+JWT_SECREATE_KEY_BACKEND=
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+
+BACKEND_URL=
+ORIGIN=FRONT_END_URL
+
+Cashfree_API_ID=
+Cashfree_API_KEY=
+```

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charter Invoice</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+    }
+
+    .invoice-container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: white;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .invoice-title,
+    .quote-details,
+    .aircraft-details,
+    .totals,
+    .bank-details,
+    .terms,
+    footer {
+        margin-bottom: 25px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header img {
+        max-height: 80px;
+        width: auto;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    .invoice-title {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .invoice-title h2 {
+        margin: 0;
+        text-transform: uppercase;
+        border-bottom: 2px solid #000;
+        display: inline-block;
+        padding-bottom: 5px;
+        text-align: center;
+    }
+
+    .quote-details {
+
+        font-size: large;
+    }
+
+    .aircraft-details {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .item-table table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .item-table th,
+    .item-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .item-table th {
+        background-color: #eee;
+    }
+
+    .totals p {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+
+    .terms h3 {
+        margin-bottom: 10px;
+        text-decoration: underline;
+    }
+
+    .terms ul {
+        padding-left: 20px;
+    }
+
+    footer p {
+        margin-top: 20px;
+    }
+
+    #ending {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="invoice-container">
+        <header>
+            <div>
+                <img src="./Screenshot 2025-07-12 185041.png" alt="logo">
+            </div>
+            <div>
+                <h1>Example Company 1</h1>
+                <p>Phone: +91-978-654-3210<br>Email: info1@examplecompany.com<br>GST: 27GST00000</p>
+            </div>
+        </header>
+
+        <section class="invoice-title">
+            <h2>QUOTE / CHARTER INVOICE</h2>
+            <p>Date: <%= invoice.date %> </p>
+        </section>
+
+        <section class="quote-details">
+            <div><strong>Quote ID:</strong> <%= invoice.id %> </div>
+            <div><strong>Customer:</strong> <%= invoice.Customer %> </div>
+            <div><strong>Contact:</strong> <%= invoice.date %> </div>
+        </section>
+
+        <section class="aircraft-details">
+            <div>
+                <div><strong>Aircraft:</strong> <%= invoice.air %> </div>
+                <div><strong>Cost per Hour:</strong> <%= invoice.cost %> </div>
+            </div>
+            <div>
+                <div><strong>Date of Travel:</strong> <%= invoice.date_travel %> </div>
+                <div><strong>Passengers:</strong> <%= invoice.passengers %></div>
+                <div><strong>Block Time:</strong> <%= invoice.block_time %></div>
+            </div>
+        </section>
+
+        <section class="item-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Description</th>
+                        <th>Block Time</th>
+                        <th>Rate</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Aircraft Hourly Cost (<%= invoice.depart %> -<%= invoice.destin %>)</td>
+                        <td>0.41</td>
+                        <td>₹45000.00</td>
+                        <td>₹18450</td>
+                    </tr>
+                    <tr>
+                        <td>Handling Fees</td>
+                        <td>-</td>
+                        <td>₹60000.00</td>
+                        <td>₹60000.00</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td><strong>Grand Total</strong></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><%= invoice.grand %> </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td><strong>Total with GST (18%)</strong></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><%= invoice.grand_total %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="bank-details">
+            <h3>Bank Details:</h3>
+            <p>
+                Account Name: EXAMPLE<br>
+                Account Number: 00000000<br>
+                Branch: NIRALA BAZAR<br>
+                IFSC Code: KKBK0000000
+            </p>
+        </section>
+
+        <section class="terms">
+            <h3>Terms & Conditions</h3>
+            <ul>
+                <li>This quote is valid for 30 days from the issue date.</li>
+                <li>Full payment is required before departure.</li>
+                <li>Cancellation charges may apply as per company policy.</li>
+                <li>Aircraft availability is subject to change without notice.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p><strong>Authorized Signature</strong></p>
+            <p id="ending">Thank you for choosing our services!<br>_____________________</p>
+        </footer>
+    </div>
+</body>
+
+</html>
