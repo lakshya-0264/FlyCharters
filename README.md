@@ -344,36 +344,7 @@ VITE_API_BASE_URL=http://localhost:8080
 
 #### Backend (.env)
 ```env
-FRONT_END_URL=http://localhost:5173
-PORT=8080
-
-# Database
-MONGO_URI=your_mongodb_connection_string
-
-# JWT Auth
-JWT_SECRET=your_jwt_secret
-
-# NodeMailer
-EMAIL_SERVICE=
-EMAIL_HOST=
-EMAIL_PORT=
-EMAIL_PASS=
-EMAIL_USER=
-SECRET_KEY=
-JWT_SECREATE_KEY_BACKEND=
-
-# Cloudinary
-CLOUD_NAME=
-API_KEY=
-API_SECRET=
-
-BACKEND_URL=http://localhost:8080
-ORIGIN=FRONT_END_URL
-
-# Cashfree Payments Gateway
-CASHFREE_API_ID=your_cashfree_app_id
-CASHFREE_API_KEY=your_cashfree_secret_key
-
+Please DM
 ```
 
 ## 📱 Component Architecture
@@ -471,4 +442,5 @@ src/
 - Performance optimizations
 
 ---
+
 
